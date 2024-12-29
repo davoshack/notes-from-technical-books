@@ -1,11 +1,13 @@
 # BOOKS LIST
 ## Building LLMs for Production
-[Prompting and Prompt Engineering](books/building-llms-for-prod/prompting-and-prompt-engineering/prompting-and-prompt-engineering.md)
+### Chapter IV: Introduction to Prompting
 
-[15 key prompt engineering tips from Anthropic’s expert prompt engineers](books/building-llms-for-prod/prompting-and-prompt-engineering/15-key-prompt-engineering-tips-from-Anthropic’s-expert-prompt-engineers.md)
+- [Prompting and Prompt Engineering](books/building-llms-for-prod/prompting-and-prompt-engineering/prompting-and-prompt-engineering.md)
 
-[DSPy (Deep Structured Prompts for Python)](books/building-llms-for-prod/prompting-and-prompt-engineering/DSPy(deep-structured-prompts-for-python).md)
+- [15 key prompt engineering tips from Anthropic’s expert prompt engineers](books/building-llms-for-prod/prompting-and-prompt-engineering/15-key-prompt-engineering-tips-from-Anthropic’s-expert-prompt-engineers.md)
 
-[Prompting Techniques](books/building-llms-for-prod/prompting-and-prompt-engineering/prompting-techniques.md)
+- [DSPy (Deep Structured Prompts for Python)](books/building-llms-for-prod/prompting-and-prompt-engineering/DSPy(deep-structured-prompts-for-python).md)
 
-[Recap](books/building-llms-for-prod/prompting-and-prompt-engineering/recap.md)
+- [Prompting Techniques](books/building-llms-for-prod/prompting-and-prompt-engineering/prompting-techniques.md)
+
+- [Recap](books/building-llms-for-prod/prompting-and-prompt-engineering/recap.md)
