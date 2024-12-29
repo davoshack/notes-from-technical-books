@@ -1,0 +1,13 @@
+# Recap
+
+Prompt engineering is a critical method that enhances the performance of language models across different applications and research areas. By designing effective prompts, we can guide the model to generate accurate, contextually relevant, and insightful responses.
+
+For simpler tasks, techniques like zero-shot prompting are effective when the model is asked to output without any prior examples. Role prompting directs the LLM to assume a specific role for executing the task, thus influencing the model’s response by providing a context or perspective. More sophisticated prompting techniques like in-context or few-shot prompting introduce the model to a small set of relevant examples or demos, improving its performance on complex tasks. Chain prompting involves linking a series of prompts sequentially, where the output from one prompt feeds into the next. Similarly, chain-of-thought prompting guides the (larger) LLM to display its reasoning process by presenting examples that demonstrate the logic behind its responses, thereby enhancing the model’s accuracy and reliability.
+
+Prompting is inherently a process of refinement, often requiring multiple iterations to achieve the best results. Establishing a clear context, providing examples, and using precise wording typically leads to more targeted outputs. Overly general prompts can lead to correct but irrelevant answers, and in some cases, vague prompts may even result in the generation of false information.
+
+Threats like prompt injection, leakage, and hacking can also expose LLMs to security challenges or cost risks. Prompt hacking is a broad term encompassing various “attack types” of LLMs. Prompt injection is a form of manipulation to elicit unintended responses or actions from an LLM. In prompt leakage, LLMs inadvertently reveal their internal data or insights gained during their training. Mitigating these threats requires implementing enhanced input validation measures, data anonymization and sanitization, and more comprehensive security measures such as monitoring and red teaming.
+
+Finally, integrating guardrails and safeguards into LLMs is crucial to prevent harmful or unintended outputs. Guardrails act as proactive controls, setting boundaries for the model’s behavior, while safeguards provide reactive protection, ensuring ethical and safe use of LLMs even when unexpected vulnerabilities arise.
+
+For a deeper understanding of prompting, prompt injection, and more, we highly recommend the resource [Learn Prompting](https://learnprompting.org/) (at learnprompting.org), where we were early contributors to the materials.
