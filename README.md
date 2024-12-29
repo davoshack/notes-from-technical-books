@@ -11,3 +11,6 @@
 - [Prompting Techniques](books/building-llms-for-prod/prompting-and-prompt-engineering/prompting-techniques.md)
 
 - [Recap](books/building-llms-for-prod/prompting-and-prompt-engineering/recap.md)
+
+### Chapter V: Retrieval-Augmented Generation
+- [Whay RAG?](books/building-llms-for-prod/retrieval-augmented-generation/why-rag.md)
