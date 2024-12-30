@@ -1,0 +1,5 @@
+## Vector Databases and Vector Stores
+
+Vector databases are a specialized type of database that keeps and manages embeddings. They efficiently store, find, and study large amounts of complex data. By turning data into embeddings, vector databases enable searches based on meaning and similarity, which is better than just matching keywords.
+
+Once the data is converted to embeddings, vector databases can quickly find similar items because similar items are represented by vectors close to each other in the vector space, which we refer to as a vector store (storing our vectors). Semantic search, which searches within the vector stores, understands the meaning of a query by comparing its embedding with the embeddings of the stored data. This ensures that the search results are relevant and match the intended meaning, regardless of the specific words used in the query or the type of data being searched.
