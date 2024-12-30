@@ -14,3 +14,4 @@
 
 ### Chapter V: Retrieval-Augmented Generation
 - [Whay RAG?](books/building-llms-for-prod/retrieval-augmented-generation/why-rag.md)
+- [Embeddings](books/building-llms-for-prod/retrieval-augmented-generation/embeddings.md)
