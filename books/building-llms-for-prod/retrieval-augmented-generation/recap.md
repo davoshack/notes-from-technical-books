@@ -1,0 +1,9 @@
+# Recap
+
+RAG makes use of vector embeddings to allow semantic search to find similar vectors in the wider dataset. RAG consists of augmenting LLMs with specific data and requiring the model to use and source this data in its answer rather than relying on what it may or may not have memorized in its model weights. RAG helps with reducing hallucinations by limiting the LLM to answer based on existing chosen data. It helps with  [explainability](https://en.wikipedia.org/wiki/Explainable_artificial_intelligence), error checking, and copyright issues by clearly referencing its sources for each comment and gives private/specific or more up-to-date data to the LLM. RAG is also useful because it doesn't rely too much on black box LLM training/fine-tuning to determine what the models know and have memorized.
+
+While RAG is highly beneficial for processing large datasets and ensuring updated, domain-specific knowledge, it comes with trade-offs, such as increased latency and potential costs, especially when integrating with third-party APIs. Developers must weigh these factors against the application’s needs, such as response time, accuracy, and resource constraints, to determine the optimal configuration.
+
+In this chapter, we covered the high-level principles of RAG and vector databases. We also implemented a basic three-step RAG pipeline process containing text pre-processing, which involves chunking and generating embeddings, followed by executing the retrieval process to identify relevant information from the knowledge base in response to a query and augmenting the prompt template with the fetched data to assist the model in response generation.
+
+Several other components are needed to prepare data and build a RAG pipeline. We will cover more of these in the next chapters before we build complete RAG projects.
