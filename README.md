@@ -13,3 +13,6 @@
 - [Embeddings](books/building-llms-for-prod/retrieval-augmented-generation/embeddings.md)
 - [Vector Databases & Vector Stores](books/building-llms-for-prod/retrieval-augmented-generation/vector-dbs-vector-stores.md)
 - [Recap](books/building-llms-for-prod/retrieval-augmented-generation/recap.md)
+
+### Chapter VI:  Introduction to LangChain & LlamaIndex
+- [LLM Frameworks Introduction](books/building-llms-for-prod/introduction-langchain-llamaindex/llm-frameworks.md)
