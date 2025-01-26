@@ -17,3 +17,7 @@
 ### Chapter VI:  Introduction to LangChain & LlamaIndex
 - [LLM Frameworks Introduction](books/building-llms-for-prod/introduction-langchain-llamaindex/llm-frameworks.md)
 - [LangChain Introduction](books/building-llms-for-prod/introduction-langchain-llamaindex/langchain-introduction.md)
+
+### Chapter VII: LangChain Prompt Templates
+- [Introduction](books/building-llms-for-prod/what-are-langchain-prompt-templates/intro.md)
+- [Recap](books/building-llms-for-prod/what-are-langchain-prompt-templates/recap.md)
