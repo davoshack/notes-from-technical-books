@@ -1,0 +1,11 @@
+# Training Data
+
+An AI model is only as good as the data it was trained on. If there’s no Vietnamese in the training data, the model won’t be able to translate from English into Vietnamese. Similarly, if an image classification model sees only animals in its training set, it won’t perform well on photos of plants.
+
+If you want a model to improve on a certain task, you might want to include more data for that task in the training data. However, collecting sufficient data for training a large model isn’t easy, and it can be expensive. Model developers often have to rely on available data, even if this data doesn’t exactly meet their needs.
+
+The “use what we have, not what we want” approach may lead to models that perform well on tasks present in the training data but not necessarily on the tasks you care about. To address this issue, it’s crucial to curate datasets that align with your specific needs. This section focuses on curating data for specific _languages_ and _domains_, providing a broad yet specialized foundation for applications within those areas. [Chapter 8](https://learning.oreilly.com/library/view/ai-engineering/9781098166298/ch08.html#ch08_dataset_engineering_1730130932019888) explores data strategies for models tailored to highly specific tasks.
+
+While language- and domain-specific foundation models can be trained from scratch, it’s also common to finetune them on top of general-purpose models.
+
+Some might wonder, why not just train a model on all data available, both general data and specialized data, so that the model can do everything? This is what many people do. However, training on more data often requires more compute resources and doesn’t always lead to better performance. For example, a model trained with a smaller amount of high-quality data might outperform a model trained with a large amount of low-quality data. Using 7B tokens of high-quality coding data,  [Gunasekar et al. (2023)](https://arxiv.org/abs/2306.11644)  were able to train a 1.3B-parameter model that outperforms much larger models on several important coding benchmarks. The impact of data quality is discussed more in  [Chapter 8](https://learning.oreilly.com/library/view/ai-engineering/9781098166298/ch08.html#ch08_dataset_engineering_1730130932019888).
