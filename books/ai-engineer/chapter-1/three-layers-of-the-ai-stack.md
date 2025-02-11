@@ -18,13 +18,13 @@ Infrastructure
 
 At the bottom is the stack is infrastructure, which includes tooling for model serving, managing data and compute, and monitoring.
 
-These three layers and examples of responsibilities for each layer are shown in [Figure 1](../chapter-1/three-layers.jpg).
+These three layers and examples of responsibilities for each layer are shown in [Figure 1](../images/three-layers.jpg).
 
-![Figure 1](../chapter-1/three-layers.jpg)
+![Figure 1](../images/three-layers.jpg)
 
-To get a sense of how the landscape has evolved with foundation models, in March 2024, I searched GitHub for all AI-related repositories with at least 500 stars. Given the prevalence of GitHub, I believe this data is a good proxy for understanding the ecosystem. In my analysis, I also included repositories for applications and models, which are the products of the application development and model development layers, respectively. I found a total of 920 repositories. [Figure 2](../chapter-1/count-repos.jpg) shows the cumulative number of repositories in each category month-over-month.
+To get a sense of how the landscape has evolved with foundation models, in March 2024, I searched GitHub for all AI-related repositories with at least 500 stars. Given the prevalence of GitHub, I believe this data is a good proxy for understanding the ecosystem. In my analysis, I also included repositories for applications and models, which are the products of the application development and model development layers, respectively. I found a total of 920 repositories. [Figure 2](../images/count-repos.jpg) shows the cumulative number of repositories in each category month-over-month.
 
-![Figure 2](../chapter-1/count-repos.jpg)
+![Figure 2](../images/count-repos.jpg)
 
 The data shows a big jump in the number of AI toolings in 2023, after the introduction of Stable Diffusion and ChatGPT. In 2023, the categories that saw the highest increases were applications and application development. The infrastructure layer saw some growth, but it was much less than the growth seen in other layers. This is expected. Even though models and applications have changed, the core infrastructural needs—resource management, serving, monitoring, etc.—remain the same.
 

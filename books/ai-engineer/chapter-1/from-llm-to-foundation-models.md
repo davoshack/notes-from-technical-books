@@ -16,9 +16,9 @@ Foundation models also mark the transition from task-specific models to general-
 
 _Foundation models, thanks to their scale and the way they are trained, are capable of a wide range of tasks._ Out of the box, general-purpose models can work relatively well for many tasks. An LLM can do both sentiment analysis and translation. However, you can often tweak a general-purpose model to maximize its performance on a specific task.
 
-[tasks benchmark](../chapter-1/tasks-benchmark.jpg) shows the tasks used by the Super-NaturalInstructions benchmark to evaluate foundation models ([Wang et al., 2022](https://arxiv.org/abs/2204.07705)), providing an idea of the types of tasks a foundation model can perform.
+[tasks benchmark](../images/tasks-benchmark.jpg) shows the tasks used by the Super-NaturalInstructions benchmark to evaluate foundation models ([Wang et al., 2022](https://arxiv.org/abs/2204.07705)), providing an idea of the types of tasks a foundation model can perform.
 
-![tasks benchmark](../chapter-1/tasks-benchmark.jpg)
+![tasks benchmark](../images/tasks-benchmark.jpg)
 
 There are multiple techniques you can use to get the model to generate  what you want. For example, you can craft detailed instructions with examples of the desirable product descriptions. This approach is  _prompt engineering_.  You can connect the model to a database of customer reviews that the model can leverage to generate better descriptions. Using a database to supplement the instructions is called _retrieval-augmented generation_ (RAG).  You can also _finetune_—further train—the model on a dataset of high-quality product descriptions.
 

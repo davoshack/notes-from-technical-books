@@ -17,9 +17,9 @@ A _language model_ encodes statistical information about one or more languages. 
 
 The basic unit of a language model is _token_. A token can be a character, a word, or a part of a word (like -tion), depending on the model.
 
-For example, GPT-4, a model behind ChatGPT, breaks the phrase “I can’t wait to build AI applications” into nine tokens, as shown in [Figure 1-1](../chapter-1/tokenizes.jpg). Note that in this example, the word “can’t” is broken into two tokens, _can_ and _’t_. You can see how different OpenAI models tokenize text on the [OpenAI website](https://oreil.ly/0QI91).
+For example, GPT-4, a model behind ChatGPT, breaks the phrase “I can’t wait to build AI applications” into nine tokens, as shown in [Figure 1-1](../images/tokenizes.jpg). Note that in this example, the word “can’t” is broken into two tokens, _can_ and _’t_. You can see how different OpenAI models tokenize text on the [OpenAI website](https://oreil.ly/0QI91).
 
-![Figure 1-1](../chapter-1/tokenizes.jpg)
+![Figure 1-1](../images/tokenizes.jpg)
 
 ###### Note
 

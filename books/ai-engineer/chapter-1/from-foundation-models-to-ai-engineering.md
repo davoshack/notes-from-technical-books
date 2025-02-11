@@ -22,4 +22,4 @@ Because of the resources it takes to develop foundation models, this process is 
 
 The world is quick to embrace this opportunity. AI engineering has rapidly emerged as one of the fastest, and quite possibly the fastest-growing, engineering discipline. Tools for AI engineering are gaining traction faster than any previous software engineering tools. Within just two years, four open source AI engineering tools (AutoGPT, Stable Diffusion eb UI, LangChain, Ollama) have already garnered more stars on GitHub than Bitcoin. They are on track to surpass even the most popular web development frameworks, including React and Vue, in star count. [Figure 1](../chapter-1/open-source-ai-engineering-tools.jpg)  shows the GitHub star growth of AI engineering tools compared to Bitcoin, Vue, and React.
 
-![Figure 1](../chapter-1/open-source-ai-engineering-tools.jpg)
+![Figure 1](../images/open-source-ai-engineering-tools.jpg)

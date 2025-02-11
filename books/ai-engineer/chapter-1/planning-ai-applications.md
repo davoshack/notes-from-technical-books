@@ -119,9 +119,9 @@ In the paper UltraChat,  [Ding et al. (2023)](https://arxiv.org/abs/2305.14233) 
 
 Product planning doesn’t stop at achieving its goals. You need to think about how this product might change over time and how it should be maintained.  Maintenance of an AI product has the added challenge of AI’s fast pace of change. The AI space has been moving incredibly fast in the last decade. It’ll probably continue moving fast for the next decade. Building on top of foundation models today means committing to riding this bullet train.
 
-Many changes are good. For example, the limitations of many models are being addressed. Context lengths are getting longer. Model outputs are getting better. Model _inference_, the process of computing an output given an input, is getting faster and cheaper. [Figure 1](../chapter-1/mmlu-accuracy.jpg) shows the evolution of inference cost and model performance on Massive Multitask Language Understanding (MMLU) ([Hendrycks et al., 2020](https://arxiv.org/abs/2009.03300)), a popular foundation model benchmark, between 2022 and 2024.
+Many changes are good. For example, the limitations of many models are being addressed. Context lengths are getting longer. Model outputs are getting better. Model _inference_, the process of computing an output given an input, is getting faster and cheaper. [Figure 1](../images/mmlu-accuracy.jpg) shows the evolution of inference cost and model performance on Massive Multitask Language Understanding (MMLU) ([Hendrycks et al., 2020](https://arxiv.org/abs/2009.03300)), a popular foundation model benchmark, between 2022 and 2024.
 
-![Figure 1](../chapter-1/mmlu-accuracy.jpg)
+![Figure 1](../images/mmlu-accuracy.jpg)
 
 However, even these good changes can cause friction in your workflows. You’ll have to constantly be on your guard and run a cost-benefit analysis of each technology investment. The best option today might turn into the worst option tomorrow. You may decide to build a model in-house because it seems cheaper than paying for model providers, only to find out after three months that model providers have dropped their prices in half, making in-house the expensive option. You might invest in a third-party solution and tailor your infrastructure around it, only for the provider to go out of business after failing to secure funding.
 
