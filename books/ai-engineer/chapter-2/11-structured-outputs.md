@@ -1,0 +1,16 @@
+## Structured Outputs
+
+Often, in production, you need models to generate outputs following certain formats. Structured outputs are crucial for the following two scenarios:
+
+1.  _Tasks requiring structured outputs._  The most common category of tasks in this scenario is semantic parsing. Semantic parsing involves converting natural language into a structured, machine-readable format.  Text-to-SQL is an example of semantic parsing, where the outputs must be valid SQL queries. Semantic parsing allow users to interact with APIs using a natural language (e.g., English). For example, text-to-PostgreSQL allows users to query a Postgres database using English queries such as “What’s the average monthly revenue over the last 6 months” instead of writing it in PostgreSQL.
+Other categories of tasks in this scenario include classification where the outputs have to be valid classes.
+2.  _Tasks whose outputs are used by downstream applications._  In this scenario, the task itself doesn’t need the outputs to be structured, but because the outputs are used by other applications, they need to be parsable by these applications.
+    
+    For example, if you use an AI model to write an email, the email itself doesn’t have to be structured. However, a downstream application using this email might need it to be in a specific format—for example, a JSON document with specific keys, such as  `{"title": [TITLE], "body": [EMAIL BODY]}`.
+    
+    _This is especially important for agentic workflows_  where a model’s outputs are often passed as inputs into tools that the model can use, as discussed in  [Chapter 6](https://learning.oreilly.com/library/view/ai-engineering/9781098166298/ch06.html#ch06_rag_and_agents_1730157386571386).
+Frameworks that support structured outputs include [guidance](https://github.com/guidance-ai/guidance), [outlines](https://github.com/dottxt-ai/outlines), [instructor](https://github.com/instructor-ai/instructor), and [llama.cpp](https://github.com/ggerganov/llama.cpp/discussions/177). Each model provider might also use their own techniques to improve their models’ ability to generate structured outputs. OpenAI was the first model provider to introduce [_JSON mode_](https://oreil.ly/NxZDF) in their text generation API. Note that an API’s JSON mode typically guarantees only that the outputs are valid JSON—not the content of the JSON objects. The otherwise valid generated JSONs can also be truncated, and thus not parsable, if the generation stops too soon, such as when it reaches the maximum output token length. However, if the max token length is set too long, the model’s responses become both too slow and expensive.
+
+You can guide a model to generate structured outputs at different layers of the AI stack: prompting, post-processing, test time compute, constrained sampling, and finetuning. The first three are more like bandages. They work best if the model is already pretty good at generating structured outputs and just needs a little nudge. For intensive treatment, you need constrained sampling and finetuning.
+
+Test time compute has just been discussed in the previous section—keep on generating outputs until one fits the expected format. This section focuses on the other four approaches.
