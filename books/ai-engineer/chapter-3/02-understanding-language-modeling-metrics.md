@@ -56,3 +56,25 @@ Since different models have different tokenization methods—for example, one mo
 One complication with BPC arises from different character encoding schemes. For example, with ASCII, each character is encoded using 7 bits, but with UTF-8, a character can be encoded using anywhere between 8 and 32 bits. A more standardized metric would be  _bits-per-byte_ (BPB), the number of bits a language model needs to represent one byte of the original training data. If the BPC is 3 and each character is 7 bits, or ⅞ of a byte, then the BPB is 3 / (⅞) = 3.43.
 
 Cross entropy tells us how efficient a language model will be at compressing text. If the BPB of a language model is 3.43, meaning it can represent each original byte (8 bits) using 3.43 bits, this language model can compress the original training text to less than half the text’s original size.
+
+## Perplexity
+
+_Perplexity_  is the exponential of entropy and cross entropy. Perplexity is often shortened to PPL. Given a dataset with the true distribution  _P_, its perplexity is defined as:
+
+PPL(P)=2H(P)
+
+The perplexity of a language model (with the learned distribution  _Q_) on this dataset is defined as:
+
+PPL(P,Q)=2H(P,Q)
+
+If cross entropy measures how difficult it is for a model to predict the next token, perplexity measures the amount of uncertainty it has when predicting the next token. Higher uncertainty means there are more possible options for the next token.
+
+Consider a language model trained to encode the 4 position tokens, as in  [Figure 3-4](https://learning.oreilly.com/library/view/ai-engineering/9781098166298/ch03.html#ch03a_figure_4_1730150757025074)  (b), perfectly. The cross entropy of this language model is 2 bits. If this language model tries to predict a position in the square, it has to choose among 2  = 4 possible options. Thus, this language model has a perplexity of 4.
+
+So far, I’ve been using  _bit_  as the unit for entropy and cross entropy. Each bit can represent 2 unique values, hence the base of 2 in the preceding perplexity equation.
+
+Popular ML frameworks, including TensorFlow and PyTorch, use  _nat_  (natural log) as the unit for entropy and cross entropy. Nat uses the  [base of  _e_](https://en.wikipedia.org/wiki/E_(mathematical_constant)), the base of natural logarithm.[8](https://learning.oreilly.com/library/view/ai-engineering/9781098166298/ch03.html#id892)  If you use  _nat_  as the unit, perplexity is the exponential of  _e_:
+
+PPL(P,Q)=eH(P,Q)
+
+Due to the confusion around  _bit_  and  _nat_, many people report perplexity, instead of cross entropy, when reporting their language models’ performance.
