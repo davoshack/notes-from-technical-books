@@ -11,3 +11,16 @@ Recall that a language model encodes statistical information (how likely a token
 In ML lingo, a language model learns the distribution of its training data. The better this model learns, the better it is at predicting what comes next in the training data, and the lower its training cross entropy. As with any ML model, you care about its performance not just on the training data but also on your production data. In general, the closer your data is to a model’s training data, the better the model can perform on your data.
 
 Compared to the rest of the book, this section is math-heavy. If you find it confusing, feel free to skip the math part and focus on the discussion of how to interpret these metrics. Even if you’re not training or finetuning language models, understanding these metrics can help with evaluating which models to use for your application. These metrics can occasionally be used for certain evaluation and data deduplication techniques, as discussed throughout this book.
+
+## Entropy
+
+_Entropy_  measures how much information, on average, a token carries. The higher the entropy, the more information each token carries, and the more bits are needed to represent a token.[7](https://learning.oreilly.com/library/view/ai-engineering/9781098166298/ch03.html#id881)
+
+Let’s use a simple example to illustrate this. Imagine you want to create a language to describe positions within a square, as shown in  [Figure 1](../images/two-languages.jpg). If your language has only two tokens, shown as (a) in  [Figure 1](../images/two-languages.jpg), each token can tell you whether the position is upper or lower. Since there are only two tokens, one bit is sufficient to represent them. The entropy of this language is, therefore, 1.
+
+![Figure 1](../images/two-languages.jpg)
+###### Figure 1. Two languages describe positions within a square. Compared to the language on the left (a), the tokens on the right (b) carry more information, but they need more bits to represent them.
+
+If your language has four tokens, shown as (b) in  [Figure 1](../images/two-languages.jpg), each token can give you a more specific position: upper-left, upper-right, lower-left, or lower-right. However, since there are now four tokens, you need two bits to represent them. The entropy of this language is 2. This language has higher entropy, since each token carries more information, but each token requires more bits to represent.
+
+Intuitively, entropy measures how difficult it is to predict what comes next in a language. The lower a language’s entropy (the less information a token of a language carries), the more predictable that language. In our previous example, the language with only two tokens is easier to predict than the language with four (you have to predict among only two possible tokens compared to four). This is similar to how, if you can perfectly predict what I will say next, what I say carries no new information.
