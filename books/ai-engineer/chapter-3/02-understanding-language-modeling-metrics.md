@@ -24,3 +24,25 @@ Let’s use a simple example to illustrate this. Imagine you want to create a la
 If your language has four tokens, shown as (b) in  [Figure 1](../images/two-languages.jpg), each token can give you a more specific position: upper-left, upper-right, lower-left, or lower-right. However, since there are now four tokens, you need two bits to represent them. The entropy of this language is 2. This language has higher entropy, since each token carries more information, but each token requires more bits to represent.
 
 Intuitively, entropy measures how difficult it is to predict what comes next in a language. The lower a language’s entropy (the less information a token of a language carries), the more predictable that language. In our previous example, the language with only two tokens is easier to predict than the language with four (you have to predict among only two possible tokens compared to four). This is similar to how, if you can perfectly predict what I will say next, what I say carries no new information.
+
+## Cross Entropy
+
+When you train a language model on a dataset, your goal is to get the model to learn the distribution of this training data. In other words, your goal is to get the model to predict what comes next in the training data. A language model’s cross entropy on a dataset measures how difficult it is for the language model to predict what comes next in this dataset.
+
+A model’s cross entropy on the training data depends on two qualities:
+
+1.  The training data’s predictability, measured by the training data’s entropy
+    
+2.  How the distribution captured by the language model diverges from the true distribution of the training data
+    
+
+Entropy and cross entropy share the same mathematical notation,  _H_. Let  _P_  be the true distribution of the training data, and  _Q_  be the distribution learned by the language model. Accordingly, the following is true:
+
+-   The training data’s entropy is, therefore,  _H_(_P_).
+-   The divergence of  _Q_  with respect to  _P_  can be measured using the Kullback–Leibler (KL) divergence, which is mathematically represented as  DKL(P||Q).
+-   The model’s cross entropy with respect to the training data is therefore:  H(P,Q)=H(P)+DKL(P||Q).
+    
+
+Cross entropy isn’t symmetric. The cross entropy of  _Q_  with respect to  _P_—_H_(_P_,  _Q_)—is different from the cross entropy of  _P_  with respect to  _Q_—_H_(_Q_,  _P_).
+
+A language model is trained to minimize its cross entropy with respect to the training data. If the language model learns perfectly from its training data, the model’s cross entropy will be exactly the same as the entropy of the training data. The KL divergence of Q with respect to P will then be 0. You can think of a model’s cross entropy as its approximation of the entropy of its training data.
