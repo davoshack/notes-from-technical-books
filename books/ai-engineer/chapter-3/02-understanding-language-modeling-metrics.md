@@ -46,3 +46,13 @@ Entropy and cross entropy share the same mathematical notation,  _H_. Let  _P_  
 Cross entropy isn’t symmetric. The cross entropy of  _Q_  with respect to  _P_—_H_(_P_,  _Q_)—is different from the cross entropy of  _P_  with respect to  _Q_—_H_(_Q_,  _P_).
 
 A language model is trained to minimize its cross entropy with respect to the training data. If the language model learns perfectly from its training data, the model’s cross entropy will be exactly the same as the entropy of the training data. The KL divergence of Q with respect to P will then be 0. You can think of a model’s cross entropy as its approximation of the entropy of its training data.
+
+## Bits-per-Character and Bits-per-Byte
+
+One unit of entropy and cross entropy is bits. If the cross entropy of a language model is 6 bits, this language model needs 6 bits to represent each token.
+
+Since different models have different tokenization methods—for example, one model uses words as tokens and another uses characters as tokens—the number of bits per token isn’t comparable across models. Some use the number of  _bits-per-character_  (BPC) instead. If the number of bits per token is 6 and on average, each token consists of 2 characters, the BPC is 6/2 = 3.
+
+One complication with BPC arises from different character encoding schemes. For example, with ASCII, each character is encoded using 7 bits, but with UTF-8, a character can be encoded using anywhere between 8 and 32 bits. A more standardized metric would be  _bits-per-byte_ (BPB), the number of bits a language model needs to represent one byte of the original training data. If the BPC is 3 and each character is 7 bits, or ⅞ of a byte, then the BPB is 3 / (⅞) = 3.43.
+
+Cross entropy tells us how efficient a language model will be at compressing text. If the BPB of a language model is 3.43, meaning it can represent each original byte (8 bits) using 3.43 bits, this language model can compress the original training text to less than half the text’s original size.
