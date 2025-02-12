@@ -78,3 +78,25 @@ Popular ML frameworks, including TensorFlow and PyTorch, use  _nat_  (natural lo
 PPL(P,Q)=eH(P,Q)
 
 Due to the confusion around  _bit_  and  _nat_, many people report perplexity, instead of cross entropy, when reporting their language models’ performance.
+
+## Perplexity Interpretation and Use Cases
+
+As discussed, cross entropy, perplexity, BPC, and BPB are variations of language models’ predictive accuracy measurements. The more accurately a model can predict a text, the lower these metrics are. In this book, I’ll use perplexity as the default  language  modeling metric. Remember that the more uncertainty the model has in predicting what comes next in a given dataset, the higher the perplexity.
+
+What’s considered a good value for perplexity depends on the data itself and how exactly perplexity is computed, such as how many previous tokens a model has access to. Here are some general rules:
+
+More structured data gives lower expected perplexity
+
+More structured data is more predictable. For example, HTML code is more predictable than everyday text. If you see an opening HTML tag like  `<head>,`  you can predict that there should be a closing tag,  `</head>,`  nearby. Therefore, the expected perplexity of a model on HTML code should be lower than the expected perplexity of a model on everyday text.
+
+The bigger the vocabulary, the higher the perplexity
+
+Intuitively, the more possible tokens there are, the harder it is for the model to predict the next token. For example, a model’s perplexity on a children’s book will likely be lower than the same model’s perplexity on  _War and Peace_. For the same dataset, say in English, character-based perplexity (predicting the next character) will be lower than word-based perplexity (predicting the next word), because the number of possible characters is smaller than the number of possible words.
+
+The longer the context length, the lower the perplexity
+
+The more context a model has, the less uncertainty it will have in predicting the next token. In 1951, Claude Shannon evaluated his model’s cross entropy by using it to predict the next token conditioned on up to 10 previous tokens. As of this writing, a model’s perplexity can typically be computed and conditioned on between 500 and 10,000 previous tokens, and possibly more, upperbounded by the model’s maximum context length.
+
+For reference, it’s not uncommon to see perplexity values as low as 3 or even lower. If all tokens in a hypothetical language have an equal chance of happening, a perplexity of 3 means that this model has a 1 in 3 chance of predicting the next token correctly. Given that a model’s vocabulary is in the order of 10,000s and 100,000s, these odds are incredible.
+
+Other than guiding the training of language models, perplexity is useful in many parts of an AI engineering workflow. First, perplexity is a good proxy for a model’s capabilities. If a model’s bad at predicting the next token, its performance on downstream tasks will also likely be bad. OpenAI’s GPT-2 report shows that larger models, which are also more powerful models, consistently give lower perplexity on a range of datasets.
