@@ -72,3 +72,22 @@ This section focuses on hand-designed metrics: exact match, lexical similarity, 
 > 
 > Techniques discussed in this section will come up again throughout the
 > book.
+
+### Exact match
+
+It’s considered an exact match if the generated response matches one of the reference responses exactly. Exact matching works for tasks that expect short, exact responses such as simple math problems, common knowledge queries, and trivia-style questions. Here are examples of inputs that have short, exact responses:
+
+-   “What’s 2 + 3?”
+    
+-   “Who was the first woman to win a Nobel Prize?”
+    
+-   “What’s my current account balance?”
+    
+-   “Fill in the blank: Paris to France is like ___ to England.”
+    
+
+There are variations to matching that take into account formatting issues. One variation is to accept any output that contains the reference response as a match. Consider the question “What’s 2 + 3?” The reference response is “5”. This variation accepts all outputs that contain “5”, including “The answer is 5” and “2 + 3 is 5”.
+
+However, this variation can sometimes lead to the wrong solution being accepted. Consider the question “What year was Anne Frank born?” Anne Frank was born on June 12, 1929, so the correct response is 1929. If the model outputs “September 12, 1929”, the correct year is included in the output, but the output is factually wrong.
+
+Beyond simple tasks, exact match rarely works. Given the original French sentence “Comment ça va?”, there are multiple possible English translations, such as “How are you?”, “How is everything?”, and “How are you doing?” If the reference data contains only these three translations and a model generates “How is it going?”, the model’s response will be marked as wrong. The longer and more complex the original text, the more possible translations there are. It’s impossible to create an exhaustive set of possible responses for an input. For complex tasks, lexical similarity and semantic similarity work better.
