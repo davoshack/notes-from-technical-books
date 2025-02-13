@@ -147,5 +147,49 @@ On top of all these biases, AI judges have the same limitations as all AI applic
 
 Despite the limitations of the AI as a judge approach, its many advantages make me believe that its adoption will continue to grow. However, AI judges should be supplemented with exact evaluation methods and/or human evaluation.
 
+## What Models Can Act as Judges?
+
+The judge can either be stronger, weaker, or the same as the model being judged. Each scenario has its pros and cons.
+
+At first glance, a stronger judge makes sense. Shouldn’t the exam grader be more knowledgeable than the exam taker? Not only can stronger models make better judgments, but they can also help improve weaker models by guiding them to generate better responses.
+
+You might wonder: if you already have access to the stronger model, why bother using a weaker model to generate responses? The answer is cost and latency. You might not have the budget to use the stronger model to generate all responses, so you use it to evaluate a subset of responses. For example, you may use a cheap in-house model to generate responses and GPT-4 to evaluate 1% of the responses.
+
+The stronger model also might be too slow for your application. You can use a fast model to generate responses while the stronger, but slower, model does evaluation in the background. If the strong model thinks that the weak model’s response is bad, remedy actions might be taken, such as updating the response with that of the strong model. Note that the opposite pattern is also common. You use a strong model to generate responses, with a weak model running in the background to do evaluation.
+
+Using the stronger model as a judge leaves us with two challenges. First, the strongest model will be left with no eligible judge. Second, we need an alternative evaluation method to determine which model is the strongest.
+
+Using a model to judge itself,  _self-evaluation_  or  _self-critique_, sounds like cheating, especially because of self-bias. However, self-evaluation can be great for sanity checks. If a model thinks its own response is incorrect, the model might not be that reliable. Beyond sanity checks, asking a model to evaluate itself can nudge a model to revise and improve its responses ([Press et al., 2022](https://arxiv.org/abs/2210.03350);  [Gou et al., 2023](https://arxiv.org/abs/2305.11738);  [Valmeekamet et al., 2023](https://arxiv.org/abs/2310.08118)).[20](https://learning.oreilly.com/library/view/ai-engineering/9781098166298/ch03.html#id955)  This example shows what self-evaluation might look like:
+
+    Prompt [from user]**: What’s 10+3?
+    First response [from AI]**: 30
+    Self-critique [from AI]**: Is this answer correct?
+    Final response [from AI]**: No it’s not. The correct answer is 13.
+
+One open question is whether the judge can be weaker than the model being judged. Some argue that judging is an easier task than generating. Anyone can have an opinion about whether a song is good, but not everyone can write a song. Weaker models should be able to judge the outputs of stronger models.
+
+[Zheng et al. (2023)](https://arxiv.org/abs/2306.05685)  found that stronger models are better correlated to human preference, which makes people opt for the strongest models they can afford. However, this experiment was limited to general-purpose judges. One research direction that I’m excited about is small, specialized judges. Specialized judges are trained to make specific judgments, using specific criteria and following specific scoring systems. A small, specialized judge can be more reliable than larger, general-purpose judges for specific judgments.
+
+Because there are many possible ways to use AI judges, there are many possible specialized AI judges. Here, I’ll go over examples of three specialized judges: reward models, reference-based judges, and preference models:
+
+Reward model
+
+A reward model takes in a (prompt, response) pair and scores how good the response is given the prompt. Reward models have been successfully used in RLHF for many years.  [Cappy](https://arxiv.org/abs/2311.06720)  is an example of a reward model developed by Google (2023). Given a pair of (prompt, response), Cappy produces a score between 0 and 1, indicating how correct the response is. Cappy is a lightweight scorer with 360 million parameters, much smaller than general-purpose foundation models.
+
+Reference-based judge
+
+A reference-based judge evaluates the generated response with respect to one or more reference responses. This judge can output a similarity score or a quality score (how good the generated response is compared to the reference responses). For example, BLEURT ([Sellam et al., 2020](https://arxiv.org/abs/2004.04696)) takes in a (candidate response, reference response) pair and outputs a similarity score between the candidate and reference response.[21](https://learning.oreilly.com/library/view/ai-engineering/9781098166298/ch03.html#id959)  Prometheus ([Kim et al., 2023](https://arxiv.org/abs/2310.08491)) takes in (prompt, generated response, reference response, scoring rubric) and outputs a quality score between 1 and 5, assuming that the reference response gets a 5.
+
+Preference model
+
+A preference model takes in (prompt, response 1, response 2) as input and outputs which of the two responses is better (preferred by users) for the given prompt. This is perhaps one of the more exciting directions for specialized judges. Being able to predict human preference opens up many possibilities. As discussed in  [Chapter 2](https://learning.oreilly.com/library/view/ai-engineering/9781098166298/ch02.html#ch02_understanding_foundation_models_1730147895571359), preference data is essential for aligning AI models to human preference, and it’s challenging and expensive to obtain. Having a good human preference predictor can generally make evaluation easier and models safer to use. There have been many initiatives in building preference models, including PandaLM ([Wang et al., 2023](https://arxiv.org/abs/2306.05087)) and JudgeLM ([Zhu et al., 2023](https://arxiv.org/abs/2310.17631)). [Figure 3](../images/output-pandalm-example.jpg) shows an example of how PandaLM works. It not only outputs which response is better but also explains its rationale.
+
+![Figure 3](../images/output-pandalm-example.jpg)
+###### Figure 3. An example output of PandaLM, given a human prompt and two generated responses. Picture from Wang et al. (2023), modified slightly for readability. The original image is available under the Apache License 2.0.
+
+Despite its limitations, the AI as a judge approach is versatile and powerful. Using cheaper models as judges makes it even more useful. Many of my colleagues, who were initially skeptical, have started to rely on it more in production.
+
+AI as a judge is exciting, and the next approach we’ll discuss is just as intriguing. It’s inspired by game design, a fascinating field.
+
 
 
