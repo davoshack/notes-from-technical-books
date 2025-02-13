@@ -1,0 +1,95 @@
+## Why AI as a Judge?
+
+AI judges are fast, easy to use, and relatively cheap compared to human evaluators. They can also work without reference data, which means they can be used in production environments where there is no reference data.
+
+You can ask AI models to judge an output based on any criteria: correctness, repetitiveness, toxicity, wholesomeness, hallucinations, and more. This is similar to how you can ask a person to give their opinion about anything. You might think, “But you can’t always trust people’s opinions.” That’s true, and you can’t always trust AI’s judgments, either. However, as each AI model is an aggregation of the masses, it’s possible for AI models to make judgments representative of the masses. With the right prompt for the right model, you can get reasonably good judgments on a wide range of topics.
+
+Studies have shown that certain AI judges are strongly correlated to human evaluators. In 2023,  [Zheng et al.](https://arxiv.org/abs/2306.05685)  found that on their evaluation benchmark, MT-Bench, the agreement between GPT-4 and humans reached 85%, which is even higher than the agreement among humans (81%). AlpacaEval authors ([Dubois et al., 2023](https://arxiv.org/abs/2404.04475)) also found that their AI judges have a near perfect (0.98) correlation with LMSYS’s Chat Arena leaderboard, which is evaluated by humans.
+
+Not only can AI evaluate a response, but it can also explain its decision, which can be especially useful when you want to audit your evaluation results.  [Figure 1](../images/ai-judges-score.jpg)  shows an example of GPT-4 explaining its judgment.
+
+Its flexibility makes AI as a judge useful for a wide range of applications, and for some applications, it’s the only automatic evaluation option. Even when AI judgments aren’t as good as human judgments, they might still be good enough to guide an application’s development and provide sufficient confidence to get a project off the ground.
+
+![Figure 1](../images/ai-judges-score.jpg)
+###### Figure 1. Not only can AI judges score, they also can explain their decisions.
+
+## How to Use AI as a Judge
+
+There are many ways you can use AI to make judgments. For example, you can use AI to evaluate the quality of a response by itself, compare that response to reference data, or compare that response to another response. Here are naive example prompts for these three approaches:
+
+1.  Evaluate the quality of a response by itself, given the original question:
+    
+    “Given the following question and answer, evaluate how good the answer is
+    for the question. Use the score from 1 to 5.
+    - 1 means very bad.
+    - 5 means very good.
+    Question: [QUESTION]
+    Answer: [ANSWER]
+    Score:”
+    
+
+2.  Compare a generated response to a reference response to evaluate whether the generated response is the same as the reference response. This can be an alternative approach to human-designed similarity measurements:
+    
+    “Given the following question, reference answer, and generated answer,
+    evaluate whether this generated answer is the same as the reference answer. 
+    Output True or False.
+    Question: [QUESTION]
+    Reference answer: [REFERENCE ANSWER]
+    Generated answer: [GENERATED ANSWER]”
+    
+3.  Compare two generated responses and determine which one is better or predict which one users will likely prefer. This is helpful for generating preference data for post-training alignment (discussed in  [Chapter 2](https://learning.oreilly.com/library/view/ai-engineering/9781098166298/ch02.html#ch02_understanding_foundation_models_1730147895571359)), test-time compute (discussed in  [Chapter 2](https://learning.oreilly.com/library/view/ai-engineering/9781098166298/ch02.html#ch02_understanding_foundation_models_1730147895571359)), and ranking models using comparative evaluation (discussed in the next section):
+    
+    “Given the following question and two answers, evaluate which answer is
+    better. Output A or B.
+    Question: [QUESTION]
+    A: [FIRST ANSWER]
+    B: [SECOND ANSWER]
+    The better answer is:”
+    
+
+A general-purpose AI judge can be asked to evaluate a response based on any criteria. If you’re building a roleplaying chatbot, you might want to evaluate if a chatbot’s response is consistent with the role users want it to play, such as “Does this response sound like something Gandalf would say?” If you’re building an application to generate promotional product photos, you might want to ask “From 1 to 5, how would you rate the trustworthiness of the product in this image?”  [Table 1](../images/built-in-ai-as-a-judge-tools.jpg)  shows common built-in AI as a judge criteria offered by some AI tools.
+
+![Table 1](../images/built-in-ai-as-a-judge-tools.jpg)
+###### Table 1. Examples of built-in AI as a judge criteria offered by some AI tools, as of September 2024. Note that as these tools evolve, these built-in criteria will change.
+
+It’s essential to remember that AI as a judge criteria aren’t standardized. Azure AI Studio’s relevance scores might be very different from MLflow’s relevance scores. These scores depend on the judge’s underlying model and prompt.
+
+How to prompt an AI judge is similar to how to prompt any AI application. In general, a judge’s prompt should clearly explain the following:
+
+1.  The task the model is to perform, such as to evaluate the relevance between a generated answer and the question.
+    
+2.  The criteria the model should follow to evaluate, such as “Your primary focus should be on determining whether the generated answer contains sufficient information to address the given question according to the ground truth answer”. The more detailed the instruction, the better.
+    
+3.  The scoring system, which can be one of these:
+    
+    -   Classification, such as good/bad or relevant/irrelevant/neutral.
+        
+    -   Discrete numerical values, such as 1 to 5. Discrete numerical values can be considered a special case of classification, where each class has a numerical interpretation instead of a semantic interpretation.
+        
+    -   Continuous numerical values, such as between 0 and 1, e.g., when you want to evaluate the degree of similarity.
+    - 
+###### Tip
+
+> Language models are generally better with text than with numbers. It’s
+> been reported that AI judges work better with classification than with
+> numerical scoring systems.
+> 
+> For numerical scoring systems, discrete scoring seems to work better
+> than continuous scoring. Empirically, the wider the range for discrete
+> scoring, the worse the model seems to get. Typical discrete scoring
+> systems are between 1 and 5.
+
+Prompts with examples have been shown to perform better. If you use a scoring system between 1 and 5, include examples of what a response with a score of 1, 2, 3, 4, or 5 looks like, and if possible, why a response receives a certain score. Best practices for prompting are discussed in  [Chapter 5](https://learning.oreilly.com/library/view/ai-engineering/9781098166298/ch05.html#ch05a_prompt_engineering_1730156991195551).
+
+Here’s part of the prompt used for the criteria  [_relevance_](https://oreil.ly/Hlkax)  by Azure AI Studio. It explains the task, the criteria, the scoring system, an example of an input with a low score, and a justification for why this input has a low score. Part of the prompt was removed for brevity.
+
+![Table 1](../images/criteria-relevance-by-azure-ai-studio-example.jpg)
+
+[Figure 2](../images/example-ai-judge.jpg)  shows an example of an AI judge that evaluates the quality of an answer when given the question.
+
+![Figure 2](../images/example-ai-judge.jpg)
+###### Figure 2. An example of an AI judge that evaluates the quality of an answer given a question.
+
+An AI judge is not just a model—it’s a system that includes both a model and a prompt. Altering the model, the prompt, or the model’s sampling parameters results in a different judge.
+
+
