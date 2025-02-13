@@ -19,3 +19,56 @@ Popular benchmarks for evaluating AI’s code generation capabilities, such as  
 When evaluating a model, for each problem a number of code samples, denoted as  _k_, are generated. A model solves a problem if any of the  _k_  code samples it generated pass all of that problem’s test cases. The final score, called  _pass@k_, is the fraction of the solved problems out of all problems. If there are 10 problems and a model solves 5 with  _k_  = 3, then that model’s pass@3 score is 50%. The more code samples a model generates, the more chance the model has at solving each problem, hence the greater the final score. This means that in expectation, pass@1 score should be lower than pass@3, which, in turn, should be lower than pass@10.
 
 Another category of tasks whose functional correctness can be automatically evaluated is game bots. If you create a bot to play  _Tetris_, you can tell how good the bot is by the score it gets. Tasks with measurable objectives can typically be evaluated using functional correctness. For example, if you ask AI to schedule your workloads to optimize energy consumption, the AI’s performance can be measured by how much energy it saves.[11](https://learning.oreilly.com/library/view/ai-engineering/9781098166298/ch03.html#id906)
+
+## Similarity Measurements Against Reference Data
+
+If the task you care about can’t be automatically evaluated using functional correctness, one common approach is to evaluate AI’s outputs against reference data. For example, if you ask a model to translate a sentence from French to English, you can evaluate the generated English translation against the correct English translation.
+
+Each example in the reference data follows the format (input, reference responses). An input can have multiple reference responses, such as multiple possible English translations of a French sentence. Reference responses are also called  _ground truths_  or  _canonical responses_. Metrics that require references are  _reference-based_, and metrics that don’t are _reference-free_.
+
+Since this evaluation approach requires reference data, it’s bottlenecked by how much and how fast reference data can be generated. Reference data is generated typically by humans and increasingly by AIs. Using human-generated data as the reference means that we treat human performance as the gold standard, and AI’s performance is measured against human performance. Human-generated data can be expensive and time-consuming to generate, leading many to use AI to generate reference data instead. AI-generated data might still need human reviews, but the labor needed to review it is much less than the labor needed to generate reference data from scratch.
+
+Generated responses that are more similar to the reference responses are considered better. There are four ways to measure the similarity between two open-ended texts:
+
+1.  Asking an evaluator to make the judgment whether two texts are the same
+    
+2.  Exact match: whether the generated response matches one of the reference responses exactly
+    
+3.  Lexical similarity: how similar the generated response looks to the reference responses
+    
+4.  Semantic similarity: how close the generated response is to the reference responses in meaning (semantics)
+    
+
+Two responses can be compared by human evaluators or AI evaluators. AI evaluators are increasingly common and will be the focus of the next section.
+
+This section focuses on hand-designed metrics: exact match, lexical similarity, and semantic similarity. Scores by exact matching are binary (match or not), whereas the other two scores are on a sliding scale (such as between 0 and 1 or between –1 and 1). Despite the ease of use and flexibility of the AI as a judge approach, hand-designed similarity measurements are still widely used in the industry for their exact nature.
+
+###### Note
+
+> This section discusses how you can use similarity measurements to
+> evaluate the quality of a generated output. However, you can also use
+> similarity measurements for many other use cases, including but not
+> limited to the following:
+> 
+> Retrieval and search
+> 
+> find items similar to a query
+> 
+> Ranking
+> 
+> rank items based on how similar they are to a query
+> 
+> Clustering
+> 
+> cluster items based on how similar they are to each other
+> 
+> Anomaly detection
+> 
+> detect items that are the least similar to the rest
+> 
+> Data deduplication
+> 
+> remove items that are too similar to other items
+> 
+> Techniques discussed in this section will come up again throughout the
+> book.
