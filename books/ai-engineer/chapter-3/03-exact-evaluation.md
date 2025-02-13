@@ -91,3 +91,39 @@ There are variations to matching that take into account formatting issues. One v
 However, this variation can sometimes lead to the wrong solution being accepted. Consider the question “What year was Anne Frank born?” Anne Frank was born on June 12, 1929, so the correct response is 1929. If the model outputs “September 12, 1929”, the correct year is included in the output, but the output is factually wrong.
 
 Beyond simple tasks, exact match rarely works. Given the original French sentence “Comment ça va?”, there are multiple possible English translations, such as “How are you?”, “How is everything?”, and “How are you doing?” If the reference data contains only these three translations and a model generates “How is it going?”, the model’s response will be marked as wrong. The longer and more complex the original text, the more possible translations there are. It’s impossible to create an exhaustive set of possible responses for an input. For complex tasks, lexical similarity and semantic similarity work better.
+
+### Lexical similarity
+
+Lexical similarity measures how much two texts overlap. You can do this by first breaking each text into smaller tokens.
+
+In its simplest form, lexical similarity can be measured by counting how many tokens two texts have in common. As an example, consider the reference response  _“My cats scare the mice”_  and two generated responses:
+
+-   “My cats eat the mice”
+    
+-   “Cats and mice fight all the time”
+    
+
+Assume that each token is a word. If you count overlapping of individual words only, response A contains 4 out of 5 words in the reference response (the similarity score is 80%), whereas response B contains only 3 out of 5 (the similarity score is 60%). Response A is, therefore, considered more similar to the reference response.
+
+One way to measure lexical similarity is  _approximate string matching_, known colloquially as  _fuzzy matching_. It measures the similarity between two texts by counting how many edits it’d need to convert from one text to another, a number called  _edit distance_. The usual three edit operations are:
+
+1.  Deletion: “b_r_ad” -> “bad”
+    
+2.  Insertion: “bad” -> “ba_r_d”
+    
+3.  Substitution: “b_a_d” -> “b_e_d”
+    
+
+Some fuzzy matchers also treat transposition, swapping two letters (e.g., “ma_ts_” -> “ma_st_”), to be an edit. However, some fuzzy matchers treat each transposition as two edit operations: one deletion and one insertion.
+
+For example, “bad” is one edit to “bard” and three edits to “cash”, so “bad” is considered more similar to “bard” than to “cash”.
+
+Another way to measure lexical similarity is  _n-gram similarity_, measured based on the overlapping of sequences of tokens,  _n-grams_, instead of single tokens. A 1-gram (unigram) is a token. A 2-gram (bigram) is a set of two tokens. “My cats scare the mice” consists of four bigrams: “my cats”, “cats scare”, “scare the”, and “the mice”. You measure what percentage of n-grams in reference responses is also in the generated response.[12](https://learning.oreilly.com/library/view/ai-engineering/9781098166298/ch03.html#id922)
+
+Common metrics for lexical similarity are BLEU, ROUGE, METEOR++, TER,  and CIDEr.  They differ in exactly how the overlapping is calculated. Before foundation models, BLEU, ROUGE, and their relatives were common, especially for translation tasks. Since the rise of foundation models, fewer benchmarks use lexical similarity. Examples of benchmarks that use these metrics are  [WMT](https://oreil.ly/92yRh),  [COCO Captions](https://oreil.ly/BO3-0), and  [GEMv2](https://arxiv.org/abs/2206.11249).
+
+A drawback of this method is that it requires curating a comprehensive set of reference responses. A good response can get a low similarity score if the reference set doesn’t contain any response that looks like it. On some benchmark examples,  [Adept](https://oreil.ly/OWD2v)  found that its model Fuyu performed poorly not because the model’s outputs were wrong, but because some correct answers were missing in the reference data.
+
+Not only that, but references can be wrong. For example, the organizers of the WMT 2023 Metrics shared task, which focuses on examining evaluation metrics for machine translation, reported that they found many bad reference translations in their data. Low-quality reference data is one of the reasons that reference-free metrics were strong contenders for reference-based metrics in terms of correlation to human judgment ([Freitag et al., 2023](https://oreil.ly/tmWqk)).
+
+Another drawback of this measurement is that higher lexical similarity scores don’t always mean better responses. For example, on HumanEval, a code generation benchmark, OpenAI found that BLEU scores for incorrect and correct solutions were similar. This indicates that optimizing for BLEU scores isn’t the same as optimizing for functional correctness ([Chen et al., 2021](https://arxiv.org/abs/2107.03374)).
