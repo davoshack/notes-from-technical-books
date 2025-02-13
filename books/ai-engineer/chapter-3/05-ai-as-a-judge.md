@@ -123,5 +123,15 @@ This can become especially confusing if the application and the AI judge are man
 
 Evaluation methods take time to standardize. As the field evolves and more guardrails are introduced, I hope that future AI judges will become a lot more standardized and reliable.
 
+### Increased costs and latency
+
+You can use AI judges to evaluate applications both during experimentation and in production. Many teams use AI judges as guardrails in production to reduce risks, showing users only generated responses deemed good by the AI judge.
+
+Using powerful models to evaluate responses can be expensive. If you use GPT-4 to both generate and evaluate responses, you’ll do twice as many GPT-4 calls, approximately doubling your API costs. If you have three evaluation prompts because you want to evaluate three criteria—say, overall response quality, factual consistency, and toxicity—you’ll increase your number of API calls four times.[17](https://learning.oreilly.com/library/view/ai-engineering/9781098166298/ch03.html#id948)
+
+You can reduce costs by using weaker models as the judges (see  [“What Models Can Act as Judges?”](https://learning.oreilly.com/library/view/ai-engineering/9781098166298/ch03.html#ch03a_what_models_can_act_as_judges_1730150757064924).) You can also reduce costs with  _spot-checking_: evaluating only a subset of responses.[18](https://learning.oreilly.com/library/view/ai-engineering/9781098166298/ch03.html#id949)  Spot-checking means you might fail to catch some failures. The larger the percentage of samples you evaluate, the more confidence you will have in your evaluation results, but also the higher the costs. Finding the right balance between cost and confidence might take trial and error. This process is discussed further in  [Chapter 4](https://learning.oreilly.com/library/view/ai-engineering/9781098166298/ch04.html#ch04_evaluate_ai_systems_1730130866187863). All things considered, AI judges are much cheaper than human evaluators.
+
+Implementing AI judges in your production pipeline can add latency. If you evaluate responses before returning them to users, you face a trade-off: reduced risk but increased latency. The added latency might make this option a nonstarter for applications with strict latency requirements.
+
 
 
