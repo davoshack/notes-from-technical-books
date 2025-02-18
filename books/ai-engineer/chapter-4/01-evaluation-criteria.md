@@ -105,3 +105,45 @@ If no context is given, you’ll have to first search for reliable sources, deri
 Often, the hardest part of factual consistency verification is determining what the facts are. Whether any of the following statements can be considered factual depends on what sources you trust: “Messi is the best soccer player in the world”, “climate change is one of the most pressing crises of our time”, “breakfast is the most important meal of the day”. The internet is flooded with misinformation: false marketing claims, statistics made up to advance political agendas, and sensational, biased social media posts. In addition, it’s easy to fall for the absence of evidence fallacy. One might take the statement “there’s no link between  _X_  and  _Y_” as factually correct because of a failure to find the evidence that supported the link.
 
 One interesting research question is what evidence AI models find convincing, as the answer sheds light on how AI models process conflicting information and determine what the facts are. For example,  [Wan et al. (2024)](https://oreil.ly/hJucg)  found that existing “models rely heavily on the relevance of a website to the query, while largely ignoring stylistic features that humans find important such as whether a text contains scientific references or is written with a neutral tone.”
+
+###### Tip
+
+> When designing metrics to measure hallucinations, it’s important to analyze the model’s outputs to understand the types of queries that it is more likely to hallucinate on. Your benchmark should focus more on these queries.
+>
+>For example, in one of my projects, I found that the model I was working with tended to hallucinate on two types of queries:
+>
+>1.  Queries that involve niche knowledge. For example, it was more likely to hallucinate when I asked it about the VMO (Vietnamese Mathematical Olympiad) than the IMO (International Mathematical Olympiad), because the VMO is much less commonly referenced than the IMO.
+> 
+>2.  Queries asking for things that don’t exist. For example, if I ask the model “What did  _X_  say about  _Y_?” the model is more likely to hallucinate if  _X_  has never said anything about  _Y_  than if  _X_  has.
+
+Let’s assume for now that you already have the context to evaluate an output against—this context was either provided by users or retrieved by you (context retrieval is discussed in [Chapter 6](https://learning.oreilly.com/library/view/ai-engineering/9781098166298/ch06.html#ch06_rag_and_agents_1730157386571386)). The most straightforward evaluation approach is AI as a judge. As discussed in [Chapter 3](https://learning.oreilly.com/library/view/ai-engineering/9781098166298/ch03.html#ch03a_evaluation_methodology_1730150757064067), AI judges can be asked to evaluate anything, including factual consistency. Both [Liu et al. (2023)](https://oreil.ly/HnIVp) and [Luo et al. (2023)](https://arxiv.org/abs/2303.15621) showed that GPT-3.5 and GPT-4 can outperform previous methods at measuring factual consistency. The paper [“TruthfulQA: Measuring How Models Mimic Human Falsehoods”](https://oreil.ly/xvYjL) (Lin et al., 2022) shows that their finetuned model GPT-judge is able to predict whether a statement is considered truthful by humans with 90–96% accuracy. Here’s the prompt that Liu et al. (2023) used to evaluate the factual consistency of a summary with respect to the original document:[3](https://learning.oreilly.com/library/view/ai-engineering/9781098166298/ch04.html#id1006)
+
+    Factual Consistency: Does the summary untruthful or misleading facts that are 
+    not supported by the source text?
+    Source Text:
+    {{Document}}
+    Summary:
+    {{Summary}}
+    Does the summary contain factual inconsistency?
+    Answer:
+
+More sophisticated AI as a judge techniques to evaluate factual consistency are self-verification and knowledge-augmented verification:
+
+*Self-verification*
+
+SelfCheckGPT ([Manakul et al., 2023](https://arxiv.org/abs/2303.08896)) relies on an assumption that if a model generates multiple outputs that disagree with one another, the original output is likely hallucinated. Given a response R to evaluate, SelfCheckGPT generates N new responses and measures how consistent R is with respect to these N new responses. This approach works but can be prohibitively expensive, as it requires many AI queries to evaluate a response.
+
+*Knowledge-augmented verification*
+
+SAFE, Search-Augmented Factuality Evaluator, introduced by Google DeepMind (Wei et al., 2024) in the paper  [“Long-Form Factuality in Large Language Models”](https://arxiv.org/abs/2403.18802), works by leveraging search engine results to verify the response. It works in four steps, as visualized in  [Figure 1](../images/safe.jpg):
+
+1.  Use an AI model to decompose the response into individual statements.
+    
+2.  Revise each statement to make it self-contained. For example, the “it” in the statement “It opened in the 20th century” should be changed to the original subject.
+    
+3.  For each statement, propose fact-checking queries to send to a Google Search API.
+    
+4.  Use AI to determine whether the statement is consistent with the research results.
+
+![Figure 1](../images/safe.jpg)
+###### Figure 1. SAFE breaks an output into individual facts and then uses a search engine to verify each fact. Image adapted from Wei et al. (2024).
