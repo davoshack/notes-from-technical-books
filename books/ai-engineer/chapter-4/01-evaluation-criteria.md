@@ -81,3 +81,27 @@ Some early NLG metrics, including  _faithfulness_  and  _relevance_, have been r
 Generative models, with their new capabilities and new use cases, have new issues that require new metrics to track. The most pressing issue is undesired hallucinations. Hallucinations are desirable for creative tasks, not for tasks that depend on factuality. A metric that many application developers want to measure is  _factual consistency_. Another issue commonly tracked is safety: can the generated outputs cause harm to users and society? Safety is an umbrella term for all types of toxicity and biases.
 
 There are many other measurements that an application developer might care about. For example, when I built my AI-powered writing assistant, I cared about  _controversiality_, which measures content that isn’t necessarily harmful but can cause heated debates. Some people might care about  _friendliness, positivity, creativity,_  or _conciseness_, but I won’t be able to go into them all. This section focuses on how to evaluate factual consistency and safety. Factual inconsistency can cause harm too, so it’s technically under safety. However, due to its scope, I put it in its own section. The techniques used to measure these qualities can give you a rough idea of how to evaluate other qualities you care about.
+
+### Factual consistency
+
+Due to factual inconsistency’s potential for catastrophic consequences, many techniques have been and will be developed to detect and measure it. It’s impossible to cover them all in one chapter, so I’ll go over only the broad strokes.
+
+The factual consistency of a model’s output can be verified under two settings: against explicitly provided facts (context) or against open knowledge:
+
+*Local factual consistency*
+
+The output is evaluated against a context. The output is considered factually consistent if it’s supported by the given context. For example, if the model outputs “the sky is blue” and the given context says that the sky is purple, this output is considered factually inconsistent. Conversely, given this context, if the model outputs “the sky is purple”, this output is factually consistent.
+
+Local factual consistency is important for tasks with limited scopes such as summarization (the summary should be consistent with the original document), customer support chatbots (the chatbot’s responses should be consistent with the company’s policies), and business analysis (the extracted insights should be consistent with the data).
+
+*Global factual consistency*
+
+The output is evaluated against open knowledge. If the model outputs “the sky is blue” and it’s a commonly accepted fact that the sky is blue, this statement is considered factually correct. Global factual consistency is important for tasks with broad scopes such as general chatbots, fact-checking, market research, etc.
+
+Factual consistency is much easier to verify against explicit facts. For example, the factual consistency of the statement “there has been no proven link between vaccination and autism” is easier to verify if you’re provided with reliable sources that explicitly state whether there is a link between vaccination and autism.
+
+If no context is given, you’ll have to first search for reliable sources, derive facts, and then validate the statement against these facts.
+
+Often, the hardest part of factual consistency verification is determining what the facts are. Whether any of the following statements can be considered factual depends on what sources you trust: “Messi is the best soccer player in the world”, “climate change is one of the most pressing crises of our time”, “breakfast is the most important meal of the day”. The internet is flooded with misinformation: false marketing claims, statistics made up to advance political agendas, and sensational, biased social media posts. In addition, it’s easy to fall for the absence of evidence fallacy. One might take the statement “there’s no link between  _X_  and  _Y_” as factually correct because of a failure to find the evidence that supported the link.
+
+One interesting research question is what evidence AI models find convincing, as the answer sheds light on how AI models process conflicting information and determine what the facts are. For example,  [Wan et al. (2024)](https://oreil.ly/hJucg)  found that existing “models rely heavily on the relevance of a website to the query, while largely ignoring stylistic features that humans find important such as whether a text contains scientific references or is written with a neutral tone.”
