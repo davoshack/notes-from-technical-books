@@ -24,3 +24,10 @@ Enhancing chunks with metadata adds context and improves retrieval accuracy. Org
 
 [Fine-tuning the LLM](https://docs.llamaindex.ai/en/stable/optimizing/fine-tuning/fine-tuning.html)  aligns the model more closely with the dataset’s knowledge, resulting in more accurate responses. It offers benefits like diminished output errors, which are often challenging to address through prompt engineering alone, especially with smaller models. As a result, it’s possible to achieve performance levels of GPT-4 while using more economical options like GPT-3.5. LlamaIndex provides various fine-tuning methods.
 
+### Monitoring and Evaluating RAG
+
+It is advisable to regularly monitor the performance of your RAG pipeline to understand the effects of any changes on the overall outcomes. Assessing a model’s response is often subjective, but several effective ways to track and measure progress exist.
+
+LlamaIndex offers  [modules for assessing the quality](https://docs.llamaindex.ai/en/stable/optimizing/evaluation/evaluation.html)  of the generated results and the efficiency of the retrieval process. The evaluation focuses on their consistency with the retrieved content, the original query, and whether they conform to a given answer or established guidelines. In retrieval evaluation, the key aspect is the relevance of the sources obtained concerning the query.
+
+A typical response evaluation approach uses a highly capable large language model, like GPT-4, to assess the responses based on criteria such as accuracy, semantic similarity, and reliability. A tutorial on the  [evaluation process and techniques](https://docs.llamaindex.ai/en/stable/module_guides/evaluating/root.html)  from the LlamaIndex documentation is accessible at  [towardsai.net/book.](http://towardsai.net/book)
