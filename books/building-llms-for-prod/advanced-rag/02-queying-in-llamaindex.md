@@ -9,3 +9,15 @@ The querying process in LlamaIndex involves several key elements:
 -   **Query Transform**: This class is used to refine a raw query string through various transformations aimed at improving the retrieval process. It works together with a Retriever and a Query Engine.
 
 Integrating these components leads to the creation of an efficient retrieval engine. The next sections show how to improve search results by adopting advanced techniques like query construction, expansion, and transformations.
+
+### Query Construction
+
+[Query construction](https://blog.langchain.dev/query-construction/)  in RAG is the process of converting user queries into a format compatible with various data sources. This involves converting questions into vector formats for unstructured data, enabling comparison with vector representations of source documents to identify the most relevant chunks. It is also applicable to structured data, such as databases, where queries are formulated in languages like SQL for effective data retrieval.
+
+The core idea is to leverage the inherent structure of the data to address user queries. For instance, a query like “movies about aliens in the year 1980” combines a semantic element like “aliens” (better retrieved through vector storage) with a structured element like “year == 1980”. The process includes translating a natural language query into the specific query language of a database, whether it’s SQL for relational databases or Cypher for graph databases.
+
+The implementation of query construction varies based on the use case. One approach involves  **MetadataFilter**  classes for vector stores, incorporating metadata filtering and an auto-retriever that converts natural language into unstructured queries. This requires defining the source, interpreting the user prompt, extracting conditions, and forming a request. Another approach is  **text-to-SQL**  for relational databases, where converting natural language into SQL requests faces challenges such as hallucinations (e.g., using non-existent tables or fields). This is managed by providing the LLM with an accurate database schema and using few-shot examples to guide the query generation.
+
+Query Construction enhances the quality of answers produced by RAG by inferring logical filter conditions directly from user questions. The retrieved texts are refined before being passed to the LLM for the final answer synthesis.
+
+>💡Query Construction is a process that translates natural language queries into structured or unstructured database queries, enhancing the accuracy of data retrieval.
