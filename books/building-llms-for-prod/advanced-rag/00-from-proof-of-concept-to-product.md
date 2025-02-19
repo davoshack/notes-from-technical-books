@@ -1,0 +1,13 @@
+# From Proof of Concept to Product: Challenges of RAG Systems
+
+The previous chapters introduced Retrieval-Augmented Generation (RAG) and the first practical implementations of it using text splitters, embeddings, and vector databases. These simple techniques may work in some cases and are often good enough for proof of concepts, but real-world projects and data vary a lot, and therefore, more advanced strategies may be required. Effective implementation of RAG applications poses specific challenges, like chunking, dealing with multimodality, updating documents, compliance, and evaluating the RAG performance.
+
+The level of granularity in chunking is crucial for RAG systems to achieve precise retrieval results. Excessively large chunks may result in the omission of essential details contained in other chunks. In contrast, very small chunks may miss important context information simply because they are too small. The chunking component requires testing and improvement, which should be tailored to the individual characteristics of the data and its application.
+
+The multimodal nature of documents and their representation in the same latent space can be difficult (for example, representing a paragraph of text versus representing a table or a picture). These representations of objects of different modalities can produce conflicts or inconsistencies when accessing information, resulting in less reliable outcomes.
+
+Moreover, maintaining up-to-date information in RAG systems is essential to accurately reflect document modifications, additions, or deletions in the stored vectors. If these updates are not correctly managed, the retrieval system might yield outdated or irrelevant data, diminishing its effectiveness. Implementing dynamic updating mechanisms for vectors enhances the system’s capability to provide relevant and up-to-date information.
+
+Compliance is another crucial aspect, particularly for RAG systems with strict data management rules in regulated sectors or environments. This is especially true for handling private documents that have restricted access. Failure to comply with relevant regulations can result in legal complications, data breaches, or the misuse of sensitive information. Ensuring that the system abides by applicable laws, regulations, and ethical standards is essential to mitigate these risks. It enhances the system’s reliability and trustworthiness, which are key to its successful deployment.
+
+RAG systems are usually evaluated and monitored in real-world projects to ensure that everything is working as intended and that the users are getting what they want from it. Metrics like faithfulness, relevancy, and retrieval precision are commonly used along with others.
