@@ -25,3 +25,9 @@ Query Construction enhances the quality of answers produced by RAG by inferring 
 ### Query Expansion
 
 Query expansion enhances the original query by adding related terms or synonyms. This technique is beneficial when the initial query is too specific or uses specialized terminology. By incorporating broader or more commonly used terms relevant to the subject, query expansion broadens the search’s scope. For example, with an initial query like “climate change effects,” query expansion might include adding synonymous or related phrases such as “global warming impact,” “environmental consequences,” or “temperature rise implications.” One method is to use the synonym_expand_policy function from the KnowledgeGraphRAGRetriever class.
+
+### Query Transformation
+
+Query transformations involve adjusting the original query to enhance its effectiveness in retrieving relevant information. These modifications can encompass alterations in the query’s structure, the incorporation of synonyms, or the addition of context.
+
+For example, consider the user query, “_What were Microsoft’s revenues in 2021?_” To optimize this query for better performance in search engines and vector databases, it could be restructured to something more concise like  _“Microsoft revenues 2021”._  Query transformations involve changing the structure of a query to increase its performance.
