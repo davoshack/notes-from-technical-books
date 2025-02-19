@@ -21,3 +21,7 @@ The implementation of query construction varies based on the use case. One appro
 Query Construction enhances the quality of answers produced by RAG by inferring logical filter conditions directly from user questions. The retrieved texts are refined before being passed to the LLM for the final answer synthesis.
 
 >💡Query Construction is a process that translates natural language queries into structured or unstructured database queries, enhancing the accuracy of data retrieval.
+
+### Query Expansion
+
+Query expansion enhances the original query by adding related terms or synonyms. This technique is beneficial when the initial query is too specific or uses specialized terminology. By incorporating broader or more commonly used terms relevant to the subject, query expansion broadens the search’s scope. For example, with an initial query like “climate change effects,” query expansion might include adding synonymous or related phrases such as “global warming impact,” “environmental consequences,” or “temperature rise implications.” One method is to use the synonym_expand_policy function from the KnowledgeGraphRAGRetriever class.
