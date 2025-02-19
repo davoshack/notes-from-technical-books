@@ -31,3 +31,7 @@ It is advisable to regularly monitor the performance of your RAG pipeline to und
 LlamaIndex offers  [modules for assessing the quality](https://docs.llamaindex.ai/en/stable/optimizing/evaluation/evaluation.html)  of the generated results and the efficiency of the retrieval process. The evaluation focuses on their consistency with the retrieved content, the original query, and whether they conform to a given answer or established guidelines. In retrieval evaluation, the key aspect is the relevance of the sources obtained concerning the query.
 
 A typical response evaluation approach uses a highly capable large language model, like GPT-4, to assess the responses based on criteria such as accuracy, semantic similarity, and reliability. A tutorial on the  [evaluation process and techniques](https://docs.llamaindex.ai/en/stable/module_guides/evaluating/root.html)  from the LlamaIndex documentation is accessible at  [towardsai.net/book.](http://towardsai.net/book)
+
+### Hybrid Search Versus Embedding Search
+
+Retrieval based on embeddings may not always be the most effective method for entity lookup. Adopting a hybrid search strategy, which merges the advantages of keyword lookup with the added context provided by embeddings, can lead to more effective outcomes. This approach balances the specificity of keyword searches and the contextual understanding of embeddings.
