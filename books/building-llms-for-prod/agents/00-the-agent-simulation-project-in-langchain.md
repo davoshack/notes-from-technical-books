@@ -58,3 +58,10 @@ These generative agents are programmed to perform various activities, such as wa
 Users can observe and even interact with the agents’ activities in virtual environments. For example, an agent might independently plan a Valentine’s Day party, distribute invitations over a couple of days, make new friends, invite other agents, and arrange for everyone to arrive at the event simultaneously.
 
 This project introduces new architectural and interaction frameworks for building authentic simulations by integrating large language models with interactive computational agents. The initiative holds the potential to provide fresh perspectives and capabilities for a range of applications, including interactive platforms, immersive environments, training tools for interpersonal skills, and prototyping applications.
+
+
+## Links to Tutorials
+
+[Tutorial 1: Building Agents for Analysis Report Creation](https://github.com/davoshack/agents/blob/main/src/chapter-x-agents/tutorial-1-building-agents-for-analysis-report-creation.ipynb)
+
+[Tutorial 2: Query and Summarize a DB with LlamaIndex](https://github.com/davoshack/agents/blob/main/src/chapter-x-agents/tutorial-2-llamaindex_rag_agent.ipynb)
