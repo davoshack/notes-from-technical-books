@@ -65,3 +65,9 @@ This project introduces new architectural and interaction frameworks for buildin
 [Tutorial 1: Building Agents for Analysis Report Creation](https://github.com/davoshack/agents/blob/main/src/chapter-x-agents/tutorial-1-building-agents-for-analysis-report-creation.ipynb)
 
 [Tutorial 2: Query and Summarize a DB with LlamaIndex](https://github.com/davoshack/agents/blob/main/src/chapter-x-agents/tutorial-2-llamaindex_rag_agent.ipynb)
+
+[Tutorial 3: Building Agents with OpenAI Assistants](https://github.com/davoshack/agents/blob/main/src/chapter-x-agents/tutorial-3-building-agents-with-openAI-assistants.ipynb)
+
+[Tutorial 4: LangChain OpenGPT](https://github.com/davoshack/agents/blob/main/src/chapter-x-agents/tutorial-4-langchain-opengpt.ipynb)
+
+[Tutorial 5: Multimodal Financial Document Analysis from PDFs](https://github.com/davoshack/agents/blob/main/src/chapter-x-agents/tutorial-5-multimodal-financial-document-analysis.ipynb)
