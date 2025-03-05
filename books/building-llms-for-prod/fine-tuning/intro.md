@@ -58,3 +58,5 @@ With recent innovations, models can now be loaded in a 4-bit format, reducing me
 Note that this technique preserves model weights and does not impact the training process. Moreover, there’s a constant trade-off between using lower-precision numbers and potentially diminishing the language processing capabilities of models. While it’s generally acceptable in most cases, it’s important to acknowledge its presence.
 
 ### Tutorial 1: SFT with LoRA
+
+### Tutorial 3: Fine-Tuning a Cohere LLM with Medical Data
