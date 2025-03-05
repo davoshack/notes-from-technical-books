@@ -60,3 +60,24 @@ Note that this technique preserves model weights and does not impact the trainin
 ### Tutorial 1: SFT with LoRA
 ### Tutorial 2: Using SFT and LoRA for Financial Sentiment
 ### Tutorial 3: Fine-Tuning a Cohere LLM with Medical Data
+
+# Reinforcement Learning from Human Feedback
+
+[Reinforcement Learning from Human Feedback](https://arxiv.org/abs/2305.18438) (RLHF)  is a technique introduced by OpenAI that combines human feedback with reinforcement learning to enhance the alignment and performance of LLMs. This method has been instrumental in improving the safety and utility of LLMs.
+
+RLHF was first applied to  [InstructGPT](https://openai.com/research/instruction-following), a version of GPT-3 fine-tuned to follow instructions. Now, it is used in the latest OpenAI models, ChatGPT, and other state-of-the-art systems.
+
+The process involves using human-curated preferences to guide the model toward preferred outputs, thus promoting the generation of responses that are more accurate, secure, and in line with human expectations. This is achieved using a reinforcement learning (RL) algorithm called Proximal Policy Optimization ([PPO](https://openai.com/research/openai-baselines-ppo)), which refines the LLM based on these human rankings. RLHF guides LLMs in generating appropriate texts by framing text generation as a reinforcement learning problem. In this setup, the language model acts as the RL agent, its potential language outputs constitute the action space, and the reward depends on the alignment of the LLM’s response with the application’s context and the user’s intent.
+
+The RLHF process begins with training a large language model (LLM) on a vast text corpus from the internet. In some cases, the pre-trained LLM undergoes an optional fine-tuning step, where it is trained on a specialized dataset to help the subsequent reinforcement learning phase converge more quickly.
+
+Next, the RLHF dataset is created by having the LLM generate multiple text completions for a series of instructions. Human evaluators then rank these completions based on factors like completeness, relevancy, accuracy, toxicity, and bias. These rankings are translated into scores, with higher scores representing better completions.
+
+A reward model is then trained using this dataset, learning to score the completions in a way that mirrors human judgment. With this reward model in place, the LLM is fine-tuned using reinforcement learning. For each random instruction, the model generates a completion, which is then scored by the reward model. A reinforcement learning algorithm (PPO) uses these scores to adjust the LLM’s parameters, increasing the likelihood of higher-scoring completions. Throughout this process, a small Kullback-Leibler (KL) divergence is maintained between the fine-tuned and original LLM to preserve valuable information and ensure consistency. After several iterations, this results in a refined and improved LLM.
+
+![image](visual-illustration-RLHF.jpg)
+###### _Visual illustration of RLHF. From the “_[Open AI” blog.](https://openai.com/research/instruction-following)
+
+It is possible to align LLMs to follow instructions with human values with SFT (with or without LoRA) with a high-quality dataset ([see the LIMA paper](https://arxiv.org/abs/2305.11206), “LIMA: Less Is More for Alignment”).
+
+So, what’s the trade-off between RLHF and SFT? In reality, it’s still an open question. Empirically, RLHF can better align the LLM if the dataset is sufficiently large and high-quality. However, it’s more expensive and time-consuming. Additionally, reinforcement learning is still quite unstable, meaning that the results are very sensitive to the initial model parameters and training hyperparameters. It often falls into local optima, and the loss diverges multiple times, requiring multiple restarts. This makes it less straightforward than plain SFT.
